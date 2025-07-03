@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: rice-classifier-app  
+    env: python
+    buildCommand: ./render-build.sh
+    startCommand: gunicorn rice_classifier.app:app --bind 0.0.0.0:$PORT
+    plan: free
+    branch: main  # or your current deployment branch
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: PYTHON_VERSION
+        value: 3.10
